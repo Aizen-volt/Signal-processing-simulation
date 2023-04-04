@@ -1,33 +1,25 @@
 #pragma once
 #include "ComplexNumber.h"
 #include <iostream>
+#include <fstream>
 #include <vector>
 
+using std::ifstream;
 using std::string;
 using std::vector;
 
 class Cu8Data {
 private:
-	FILE* file;
-	size_t fileLength;
+	ifstream file;
 	vector<ComplexNumber> samples;
 public:
 	Cu8Data(string file) {
-		this->file = fopen(file.c_str(), "rb");
-		SetLength();
-		ReadFile();
+		this->file.open(file, std::ios::binary);
 	}
 
 
 	~Cu8Data() {
-		fclose(file);
-	}
-
-
-	void SetLength() {
-		fseek(file, 0L, SEEK_END);
-		fileLength = ftell(file);
-		rewind(file);
+		file.close();
 	}
 
 
@@ -38,20 +30,11 @@ public:
 
 
 	void ReadFile() {
-		char* buffer = new char[fileLength + 1];
-		for (size_t i = 0; i < fileLength; i++) {
-			fread(buffer + i, 1, 1, this->file);
-		}
-		CreateSamples(buffer);
-		delete[] buffer;
-	}
-
-
-	void CreateSamples(char* buffer) {
-		for (size_t i = 0; i < fileLength; i += 2) {
-			long double temp1 = (long double(buffer[i]) - 127.5) / 127.5;
-			long double temp2 = (long double(buffer[i + 1]) - 127.5) / 127.5;
-			ComplexNumber temp(temp1, temp2);
+		vector<unsigned char> buffer(std::istreambuf_iterator<char>(file), {});
+		for (int i = 0; i < buffer.size(); i += 2) {
+			long double a = (buffer[i] - 127.5) / 127.5;
+			long double b = (buffer[i + 1] - 127.5) / 127.5;
+			ComplexNumber temp = { a, b };
 			samples.push_back(temp);
 		}
 	}

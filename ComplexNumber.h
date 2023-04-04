@@ -38,7 +38,11 @@ public:
 		return temp;
 	}
 	friend ComplexNumber& operator*(const ComplexNumber& left, const ComplexNumber& right) {
-		ComplexNumber temp(left.GetA() * right.GetA() - left.GetB() * right.GetB(), left.GetA() * right.GetB() - left.GetB() * right.GetA());
+		long double x1 = left.GetA();
+		long double x2 = right.GetA();
+		long double y1 = left.GetB();
+		long double y2 = right.GetB();
+		ComplexNumber temp(x1 * x2 - y1 * y2, x1 * y2 + y1 * x2);
 		return temp;
 	}
 	friend ComplexNumber& operator*(long double left, const ComplexNumber& right) {

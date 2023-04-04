@@ -17,8 +17,8 @@ public:
 
 	void Demod() {
 		for (size_t i = 1; i < samples.size(); i++) {
-			ComplexNumber temp1 = samples[i] * samples[i - 1];
-			ComplexNumber temp2 = temp1.Conjugate();
+			ComplexNumber temp1 = samples[i - 1].Conjugate();
+			ComplexNumber temp2 = samples[i] * temp1;
 			long double arg = temp2.GetArg();
 			samplesDemoded.push_back(1.0 / 3.14 * arg);
 		}

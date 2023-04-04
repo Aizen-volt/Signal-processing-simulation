@@ -24,20 +24,21 @@ int main() {
 	const int Decimate2Parameter = 8;
 
 	Cu8Data input(fileName);
+	input.ReadFile();
 
 	FMShift shift(input.GetSamples());
 	shift.Shift(FMShiftParameter);
 
-	Decimate decimate1(shift.GetSamplesShifted());
-	decimate1.AverageComplex(Decimate1Parameter);
+	Decimate<ComplexNumber> decimate1(shift.GetSamplesShifted());
+	decimate1.Average(Decimate1Parameter);
 
-	FMDemod demod(decimate1.GetComplexSamplesDecimated());
+	FMDemod demod(decimate1.GetSamplesDecimated());
 	demod.Demod();
 
-	Decimate decimate2(demod.GetSamplesDemoded());
-	decimate2.AverageDouble(Decimate2Parameter);
+	Decimate<long double> decimate2(demod.GetSamplesDemoded());
+	decimate2.Average(Decimate2Parameter);
 
-	Au au(outputFileName, decimate2.GetDoubleSamplesDecimated());
+	Au au(outputFileName, decimate2.GetSamplesDecimated());
 	au.GenerateFile();
 
 	return 0;
