@@ -1,17 +1,14 @@
 #pragma once
 #include <vector>
 
-using std::vector;
-
 template <typename T>
 class Decimate {
 private:
-	vector<T> samples;
-	vector<T> samplesDecimated;
+	std::vector<T> samples;
+	std::vector<T> samplesDecimated;
 public:
-	Decimate(vector<T> samples) {
-		for (size_t i = 0; i < samples.size(); i++)
-			this->samples.push_back(samples[i]);
+	Decimate(const vector<T>& samples) {
+		this->samples = samples;
 	}
 
 
@@ -20,13 +17,12 @@ public:
 			T sum;
 			sum = 0.0;
 			for (size_t j = 0; j < p; j++) {
-				T temp = samples[i - j];
-				temp = temp / (double)p;
+				T temp = samples[i - j] / (double)p;
 				sum = sum + temp;
 			}
 			samplesDecimated.push_back(sum);
 		}
 	}
 
-	vector<T>& GetSamplesDecimated() { return samplesDecimated; }
+	const std::vector<T>&GetSamplesDecimated() const { return samplesDecimated; }
 };

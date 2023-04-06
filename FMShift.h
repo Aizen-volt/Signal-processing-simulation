@@ -9,9 +9,8 @@ private:
 	vector<ComplexNumber> samples;
 	vector<ComplexNumber> samplesShifted;
 public:
-	FMShift(vector<ComplexNumber> samples) {
-		for (size_t i = 0; i < samples.size(); i++)
-			this->samples.push_back(samples[i]);
+	FMShift(const vector<ComplexNumber>& samples) {
+		this->samples = samples;
 	}
 
 
@@ -25,5 +24,5 @@ public:
 	}
 
 
-	vector<ComplexNumber>& GetSamplesShifted() { return samplesShifted; }
+	const vector<ComplexNumber>& GetSamplesShifted() const { return samplesShifted; }
 };

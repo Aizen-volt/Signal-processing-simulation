@@ -8,20 +8,18 @@
 
 #include <iostream>
 #include <fstream>
-#include <cmath>
 #include <vector>
-#include <climits>
+#include <chrono>
 
-using std::string;
 
 int main() {
-	char static_assert_float32[1 - (2 * ((sizeof(float) * CHAR_BIT) != 32))];
-
-	const string fileName = "fm1_99M726_1M92.cu8";
-	const string outputFileName = "output.au";
+	const std::string fileName = "fm1_99M726_1M92.cu8";
+	const std::string outputFileName = "output.au";
 	const long double FMShiftParameter = -0.090625;
 	const int Decimate1Parameter = 5;
 	const int Decimate2Parameter = 8;
+
+	auto start = std::chrono::system_clock::now();
 
 	Cu8Data input(fileName);
 	input.ReadFile();
@@ -40,6 +38,10 @@ int main() {
 
 	Au au(outputFileName, decimate2.GetSamplesDecimated());
 	au.GenerateFile();
+
+	auto end = std::chrono::system_clock::now();
+	auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+	std::cout << elapsed.count() << '\n';
 
 	return 0;
 }
