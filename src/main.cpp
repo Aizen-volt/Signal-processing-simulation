@@ -1,7 +1,7 @@
 #include "Cu8Data.h"
-#include "FMShift.h"
+#include "FmShift.h"
 #include "Decimate.h"
-#include "FMDemod.h"
+#include "FmDemod.h"
 #include "Au.h"
 
 #include <iostream>
