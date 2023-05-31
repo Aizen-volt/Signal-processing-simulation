@@ -12,7 +12,7 @@
 
 int main() {
     const std::string fileName = "fm1_99M726_1M92.cu8";
-    const std::string outputFileName = "output.au";
+    const std::string outputFileName = "fm1_48k0.au";
     const long double FMShiftParameter = -0.090625;
     const int Decimate1Parameter = 5;
     const int Decimate2Parameter = 8;
