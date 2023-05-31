@@ -7,7 +7,7 @@ Program should be tested using block diagram for modelling FM demodulation of qu
 ## Blocks functionality
 - cu8data - reads complex number samples from recorded file
 - fmshift - shifts signal spectrum to the frequency of used station
-- decimate - averages the last p samples on-spot, returns average value for every p samples claster
+- decimate - averages the last p samples on-spot, returns average value for every p samples cluster
 - fmdemod - performs FM demodulation
 - au - saves samples to .au file
 
