@@ -13,4 +13,4 @@ Program should be tested using block diagram for modelling FM demodulation of qu
 
 ## Example
 #### Input: fm1_99M726_1M92.cu8
-#### Output: output.au
+#### Output: fm1_48k0.au
