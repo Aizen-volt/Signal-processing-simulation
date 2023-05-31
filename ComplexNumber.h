@@ -1,88 +1,31 @@
-#pragma once
-#include <iostream>
-#include <cmath>
+#ifndef SIGNAL_PROCESSING_SIMULATION_COMPLEXNUMBER_H
+#define SIGNAL_PROCESSING_SIMULATION_COMPLEXNUMBER_H
+
 
 class ComplexNumber {
 private:
-	//z = a+ib
-	long double a, b;
+    //z = a + ib
+    long double a, b;
 public:
-	ComplexNumber() : a(0), b(0) {}
+    ComplexNumber();
+    ComplexNumber(long double a, long double b);
 
+    void Exponential();
 
-	ComplexNumber(long double a, long double b) {
-		this->a = a;
-		this->b = b;
-	}
+    long double GetA() const;
+    long double GetB() const;
+    long double GetArg() const;
 
+    ComplexNumber Conjugate() const;
 
-	//e^(j*2PI*p*n)
-	void Exponential() {
-		long double exponent = 2 * 3.14 * a * b;
-		a = cos(exponent);
-		b = sin(exponent);
-	}
+    ComplexNumber operator=(long double right);
 
-
-	long double GetA() const { return a; }
-
-
-	long double GetB() const { return b; }
-
-
-	long double GetArg() const { return atan2(b, a); }
-
-
-	ComplexNumber Conjugate() const {
-		ComplexNumber temp = { a, -b };
-		return temp;
-	}
-
-
-	ComplexNumber& operator=(long double right) const {
-		ComplexNumber temp(right, 0);
-		return temp;
-	}
-
-
-	friend ComplexNumber& operator+(const ComplexNumber& left, const ComplexNumber& right) {
-		long double x1 = left.GetA();
-		long double x2 = right.GetA();
-		long double y1 = left.GetB();
-		long double y2 = right.GetB();
-		ComplexNumber temp(x1 + x2, y1 + y2);
-		return temp;
-	}
-
-
-	friend ComplexNumber& operator-(const ComplexNumber& left, const ComplexNumber& right) {
-		long double x1 = left.GetA();
-		long double x2 = right.GetA();
-		long double y1 = left.GetB();
-		long double y2 = right.GetB();
-		ComplexNumber temp(x1 - x2, y1 - y2);
-		return temp;
-	}
-
-
-	friend ComplexNumber& operator*(const ComplexNumber& left, const ComplexNumber& right) {
-		long double x1 = left.GetA();
-		long double x2 = right.GetA();
-		long double y1 = left.GetB();
-		long double y2 = right.GetB();
-		ComplexNumber temp(x1 * x2 - y1 * y2, x1 * y2 + y1 * x2);
-		return temp;
-	}
-
-
-	friend ComplexNumber& operator*(long double left, const ComplexNumber& right) {
-		ComplexNumber temp(left * right.a, left * right.b);
-		return temp;
-	}
-
-
-	friend ComplexNumber& operator/(const ComplexNumber& left, long double right) {
-		ComplexNumber temp(left.GetA() / right, left.GetB() / right);
-		return temp;
-	}
+    friend ComplexNumber operator+(const ComplexNumber& left, const ComplexNumber& right);
+    friend ComplexNumber operator-(const ComplexNumber& left, const ComplexNumber& right);
+    friend ComplexNumber operator*(const ComplexNumber& left, const ComplexNumber& right);
+    friend ComplexNumber operator*(long double left, const ComplexNumber& right);
+    friend ComplexNumber operator/(const ComplexNumber& left, long double right);
 };
+
+
+#endif //SIGNAL_PROCESSING_SIMULATION_COMPLEXNUMBER_H
