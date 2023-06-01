@@ -1,5 +1,4 @@
 # Signal processing simulation
-## Description
 The goal of the task is to write a program to simulate signal processing using sample-after-sample method according to given block diagram.
 Program should be tested using block diagram for modelling FM demodulation of quadrature sampled radio signal recorded in file:
 <p align="center"><img src="diagram1.png" /></p>
